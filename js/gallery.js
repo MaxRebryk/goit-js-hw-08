@@ -74,9 +74,19 @@ gallery.addEventListener("click",(event) =>{
     const originalSource = event.target.dataset.source;
     basicLightbox.create(`
 		<img width="1112" height="640" src="${originalSource}">
-	  `).show()
-
+	  `,{
+      onShow: instance => {
+          document.addEventListener('keydown',close());
+      },
+      onClose: instance => {
+          document.removeEventListener('keydown', close());
+      },
+      })
+  }
 });
+
+
+
 
 const insertImages = (images) => {
   const newGalleryItemHTML = images.map(image =>`
