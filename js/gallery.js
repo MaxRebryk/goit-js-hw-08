@@ -75,8 +75,7 @@ gallery.addEventListener("click",(event) =>{
     basicLightbox.create(`
 		<img width="1112" height="640" src="${originalSource}">
 	  `).show()
-  }
- 
+
 });
 
 const insertImages = (images) => {
