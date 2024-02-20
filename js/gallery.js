@@ -72,19 +72,18 @@ gallery.addEventListener("click",(event) =>{
   event.preventDefault();
   if (event.target.nodeName === "IMG"){
     const originalSource = event.target.dataset.source;
-    basicLightbox.create(`
+    const galleryShow = basicLightbox.create(`
 		<img width="1112" height="640" src="${originalSource}">
-	  `,{
-      onShow: instance => {
-          gallery.addEventListener('keydown',event =>{
-            basicLightbox.close()
-          });
-      },
-      onClose: instance => {
-          gallery.removeEventListener('keydown', close());
-      },
+	  `);
+    galleryShow.show();
+    if (galleryShow.visible()){
+      gallery.addEventListener("keydown", (event) =>{
+        galleryShow.close();
       })
+    }
   }
+  
+ 
 });
 
 
