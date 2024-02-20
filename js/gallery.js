@@ -74,7 +74,7 @@ gallery.addEventListener("click",(event) =>{
     const originalSource = event.target.dataset.source;
     const galleryShow = basicLightbox.create(`
 		<img width="1112" height="640" src="${originalSource}">
-	  `);
+	  `, {});
     galleryShow.show();
     if (galleryShow.visible()){
       gallery.addEventListener("keydown", (event) =>{
@@ -85,8 +85,6 @@ gallery.addEventListener("click",(event) =>{
   
  
 });
-
-
 
 
 const insertImages = (images) => {
