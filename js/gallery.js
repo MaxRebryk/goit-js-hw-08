@@ -76,10 +76,12 @@ gallery.addEventListener("click",(event) =>{
 		<img width="1112" height="640" src="${originalSource}">
 	  `,{
       onShow: instance => {
-          document.addEventListener('keydown',close());
+          gallery.addEventListener('keydown',event =>{
+            basicLightbox.close()
+          });
       },
       onClose: instance => {
-          document.removeEventListener('keydown', close());
+          gallery.removeEventListener('keydown', close());
       },
       })
   }
