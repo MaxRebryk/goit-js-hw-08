@@ -77,7 +77,7 @@ gallery.addEventListener("click",(event) =>{
 	  `, {});
     galleryShow.show();
     if (galleryShow.visible()){
-      gallery.addEventListener("keydown", (event) =>{
+      document.addEventListener("keydown", (event) =>{
         galleryShow.close();
       })
     }
