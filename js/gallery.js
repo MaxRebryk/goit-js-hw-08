@@ -68,24 +68,36 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 
-gallery.addEventListener("click",(event) =>{
-  event.preventDefault();
-  if (event.target.nodeName === "IMG"){
-    const originalSource = event.target.dataset.source;
-    const galleryShow = basicLightbox.create(`
-		<img width="1112" height="640" src="${originalSource}">
-	  `, {});
-    galleryShow.show();
-    if (galleryShow.visible()){
-      document.addEventListener("keydown", (event) =>{
+const onModalClose = (event) => {
+    if (event.code === 'Escape') {
         galleryShow.close();
-      })
     }
-  }
-  
- 
-});
+};
 
+gallery.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (event.target.nodeName === "IMG") {
+        const originalSource = event.target.dataset.source;
+        const galleryShow = basicLightbox.create(`
+            <img width="1112" height="640" src="${originalSource}">
+        `, {
+            onShow: instance => {
+                document.addEventListener('keydown', onModalClose);
+            },
+            onClose: instance => {
+                document.removeEventListener('keydown', onModalClose);
+            },
+        });
+        galleryShow.show();
+        if(galleryShow.visible()){
+          document.addEventListener("keydown", (event) => {
+            if (event.code === 'Escape') {
+              galleryShow.close();
+          }
+          })
+        }
+    }
+});
 
 const insertImages = (images) => {
   const newGalleryItemHTML = images.map(image =>`
